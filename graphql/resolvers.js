@@ -5,13 +5,15 @@ const storage = multer.diskStorage({
     cb(null, './uploads'); // Specify the destination where files will be stored
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname); // Define the file name (customize as needed)
+    cb(null, file.originalname); 
   },
 });
 
 const upload = multer({ storage: storage });
 
 module.exports = {
+
+  // resolver for creating content
   createContent: async function ({ userInput, file }, req) {
     if (!file) {
       throw new Error('No file uploaded');
@@ -36,6 +38,8 @@ module.exports = {
     const stored = await content.save();
     return { ...stored._doc, _id: stored._id.toString() };
   },
+
+  //resolver for posting comment
   postComment: async function ({ userInput }, req) {
     try {
       // Find the content by ID
@@ -62,7 +66,9 @@ module.exports = {
       throw new Error('Error posting comment: ' + error.message);
     }
   },
-  //get all content created by users
+
+
+  //resolver for getting all content created by users
   getAllContent:async function(args, req){
     const content = await Content.find().populate('userId');
     return{content:content.map(c =>{
@@ -81,9 +87,10 @@ module.exports = {
   },
 
 
-  // Function to convert the file stream to a buffer
+
  
 };
+  // Function to convert the file stream to a buffer
 async function streamToBuffer(stream) {
   return new Promise((resolve, reject) => {
     const chunks = [];
