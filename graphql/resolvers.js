@@ -53,7 +53,7 @@ module.exports = {
       // Add the comment to the content
       const newComment = {
         comment: userInput.comment,
-        userId: userInput.userId, 
+        userId: req.userId, 
       };
   
       content.comments.push(newComment);
