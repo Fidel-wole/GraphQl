@@ -4,7 +4,6 @@ module.exports = buildSchema(
     `
     type Content {
         _id :ID
-        userId:String
         content:String
         caption:String
         hashtags:[String]
@@ -18,7 +17,6 @@ module.exports = buildSchema(
 
     type Comment{
         comment:String
-        userId:String
         timestamp:String
     }
     
